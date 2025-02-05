@@ -39,7 +39,7 @@ bool BNO055I2CDriver::reset() {
     _i2c_smbus_write_byte_data(file, BNO055_SYS_TRIGGER_ADDR, 0);
     std::this_thread::sleep_for(std::chrono::milliseconds(25));
 
-    _i2c_smbus_write_byte_data(file, BNO055_OPR_MODE_ADDR, BNO055_OPERATION_MODE_NDOF);
+    _i2c_smbus_write_byte_data(file, BNO055_OPR_MODE_ADDR, BNO055_OPERATION_MODE_AMG);
     std::this_thread::sleep_for(std::chrono::milliseconds(25));
 
     return true;
