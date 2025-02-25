@@ -139,6 +139,15 @@ bool BNO055I2CNode::readAndPublish() {
     msg_raw.angular_velocity.y = (double)record.raw_angular_velocity_y / 900.0;
     msg_raw.angular_velocity.z = (double)record.raw_angular_velocity_z / 900.0;
 
+    // Add covariance for raw IMU data
+    msg_raw.orientation_covariance[0] = -1;  // Orientation not provided
+    msg_raw.angular_velocity_covariance[0] = 5.95e-6;  // derived from datasheet
+    msg_raw.angular_velocity_covariance[4] = 5.95e-6;
+    msg_raw.angular_velocity_covariance[8] = 5.95e-6;
+    msg_raw.linear_acceleration_covariance[0] = 0.01886;
+    msg_raw.linear_acceleration_covariance[4] = 0.01886;
+    msg_raw.linear_acceleration_covariance[8] = 0.01886;
+
     sensor_msgs::msg::MagneticField msg_mag;
     msg_mag.header.stamp = time;
     msg_mag.header.frame_id = param_frame_id;
